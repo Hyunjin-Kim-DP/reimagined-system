@@ -1,58 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] LayerMask m_groundMask;
+    [SerializeField] LayerMask m_groundLayer;
+    [SerializeField] Transform m_groundChecker;
     bool m_isGrounded;
     
     [Space]
     [SerializeField] float m_speed = 10;
     [SerializeField] float m_maxSpeed = 20f;
-    [SerializeField] float m_jumpImpulse = 5;
+    [SerializeField] float m_jumpHeight = 2.5f;
 
-    [Space]
-    [SerializeField] float m_groundDrag = 5;
-    [SerializeField] float m_airMoveFactor = .3f;
+
+    Vector3 velocity;
 
     // Start is called before the first frame update
     void Start()
     {
         Application.targetFrameRate = 60;
-        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
-        var moveDirection = transform.forward * Input.GetAxis("Vertical") + transform.right * Input.GetAxis("Horizontal");
-        Vector3 moveVector = m_isGrounded ? moveDirection.normalized * m_speed : moveDirection.normalized * m_speed * m_airMoveFactor;
-        
-        GetComponent<Rigidbody>().AddForce(moveVector);
-        UpdateSpeedLimit(moveDirection);
+        Vector3 forward = transform.forward * Input.GetAxis("Vertical") * m_speed;
+        Vector3 right = transform.right * Input.GetAxis("Horizontal") * m_speed;
+        GetComponent<CharacterController>().Move((forward + right) * Time.deltaTime);
 
-        m_isGrounded = Physics.BoxCast(transform.position, Vector3.one * .5f, Vector3.down, Quaternion.identity, 
-            GetComponent<CapsuleCollider>().height * .5f, m_groundMask);
-
-        GetComponent<Rigidbody>().drag = m_isGrounded ? m_groundDrag : 0;
-
-        if (m_isGrounded && Input.GetKeyDown(KeyCode.Space))
+        m_isGrounded = Physics.BoxCast(m_groundChecker.position, Vector3.one * .5f, Vector3.down, 
+            Quaternion.identity, .1f, m_groundLayer);
+        if (m_isGrounded)
         {
-            GetComponent<Rigidbody>().AddForce(Vector2.up * m_jumpImpulse, ForceMode.Impulse);
+            velocity.y = Mathf.Clamp(velocity.y, -1, m_maxSpeed);
+            if (Input.GetKeyDown(KeyCode.Space)) 
+            {
+                velocity.y = Mathf.Sqrt(m_jumpHeight * -2f * Physics.gravity.y);
+            }
         }
+
+        velocity.y += Physics.gravity.y * Time.deltaTime;
+        GetComponent<CharacterController>().Move(velocity * Time.deltaTime);
     }
 
-    void UpdateSpeedLimit(Vector3 moveDir) 
+    void OnDrawGizmos() 
     {
-        Vector3 velocity = GetComponent<Rigidbody>().velocity;
-        velocity.y = 0;
-
-        if (velocity.magnitude > m_maxSpeed) 
-        {
-            Vector3 clamped = velocity.normalized * m_maxSpeed;
-            GetComponent<Rigidbody>().velocity = new Vector3(clamped.x, GetComponent<Rigidbody>().velocity.y, clamped.z);
-        }
+        if (m_groundChecker == null) return;
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(m_groundChecker.position, Vector3.one);
     }
 }

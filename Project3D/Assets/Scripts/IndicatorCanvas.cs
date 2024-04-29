@@ -17,6 +17,6 @@ public class IndicatorCanvas : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_speedText.text = m_player.GetComponent<Rigidbody>().velocity.magnitude.ToString();
+        // m_speedText.text = m_player.GetComponent<Rigidbody>().velocity.magnitude.ToString();
     }
 }
