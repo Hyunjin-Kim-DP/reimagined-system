@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FirstPersonCam : MonoBehaviour
 {
-    [SerializeField] Transform m_player;
     [SerializeField] Transform m_follow;
 
     Vector2 m_inputVector;
@@ -28,8 +27,7 @@ public class FirstPersonCam : MonoBehaviour
         m_inputVector.y = Mathf.Clamp(m_inputVector.y, -90, m_verticalAngleLimit);
 
         transform.rotation = Quaternion.Euler(m_inputVector.y, m_inputVector.x, 0);
-        transform.position = m_follow.position;
-
-        m_player.rotation = Quaternion.Euler(0, m_inputVector.x, 0);
+        
+        transform.parent.rotation = Quaternion.Euler(0, m_inputVector.x, 0);
     }
 }
