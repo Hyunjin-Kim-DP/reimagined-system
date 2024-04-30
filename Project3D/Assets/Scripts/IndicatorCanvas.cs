@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class IndicatorCanvas : MonoBehaviour
 {
-    [SerializeField] PlayerController m_player;
-    [SerializeField] Text m_speedText;
+    [SerializeField] Player m_player;
+    [SerializeField] Text m_playerHP;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +17,6 @@ public class IndicatorCanvas : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // m_speedText.text = m_player.GetComponent<Rigidbody>().velocity.magnitude.ToString();
+        m_playerHP.text = m_player.m_hp.ToString();
     }
 }
