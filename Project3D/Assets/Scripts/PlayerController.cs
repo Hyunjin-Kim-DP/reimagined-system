@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] WeaponMover m_weaponMover;
+    [SerializeField] Weapon m_weapon;
 
     [Space]    
     [SerializeField] LayerMask m_groundLayer;
@@ -29,6 +29,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.O)) 
+        {
+            m_weapon.OnShot();
+        }
+
         Vector3 forward = transform.forward * Input.GetAxis("Vertical") * m_speed;
         Vector3 right = transform.right * Input.GetAxis("Horizontal") * m_speed;
         GetComponent<CharacterController>().Move((forward + right) * Time.deltaTime);
@@ -39,7 +44,7 @@ public class PlayerController : MonoBehaviour
         {
             if ((forward + right).magnitude > m_speed * 0.5f) 
             {
-                m_weaponMover.UpdateBobbing();
+                m_weapon.PlayBobbing();
             }
 
             velocity.y = Mathf.Clamp(velocity.y, -1, m_maxSpeed);

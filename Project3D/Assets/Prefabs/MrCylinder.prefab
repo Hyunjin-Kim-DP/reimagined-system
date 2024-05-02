@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8726346719713596682}
   - component: {fileID: 7751060103815107234}
+  - component: {fileID: 4440935416220165531}
   m_Layer: 0
   m_Name: WeaponHolder
   m_TagString: Untagged
@@ -25,14 +26,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2583686579555283120}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.019792402, z: -0, w: 0.9998041}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.73, y: -0.516, z: 1.581}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8391930382856382368}
+  - {fileID: 419670638276402877}
   m_Father: {fileID: 6099174725529862821}
-  m_LocalEulerAnglesHint: {x: 0, y: -2.268, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7751060103815107234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56,6 +58,59 @@ MonoBehaviour:
   m_bobbingFrequency: 10
   m_bobbingAmplitude: 0.1
   m_bobbingSmooth: 10
+  m_power: 80
+  m_reboundSmooth: 30
+  m_reboundReturnSmooth: 10
+--- !u!114 &4440935416220165531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2583686579555283120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49a4f5b58ed29f540b2399295da4c7be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_weaponMover: {fileID: 7751060103815107234}
+  m_muzzleFlashPrefab: {fileID: 100004, guid: 2b80d2843dd54ca46ac16e9f28dcf9d2, type: 3}
+  m_camera: {fileID: 6099174725529862821}
+  m_muzzleFlashPosition: {fileID: 419670638276402877}
+  m_hitBoxPrefab: {fileID: 2472531293408193164, guid: 7f9ccb9f8e7375b4582c713848a4ff9b,
+    type: 3}
+  m_hitboxDistance: 1.5
+--- !u!1 &2995422598360610575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 419670638276402877}
+  m_Layer: 8
+  m_Name: MuzzleMarker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &419670638276402877
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2995422598360610575}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.131, z: 1.239}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8726346719713596682}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7409305337373989378
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,7 +264,7 @@ Transform:
   m_GameObject: {fileID: 7614297485331421391}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.149, z: 0.047}
+  m_LocalPosition: {x: 0, y: -1.194, z: 0.047}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -244,7 +299,7 @@ Transform:
   m_GameObject: {fileID: 7841495639644554966}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.344, z: 0.72}
+  m_LocalPosition: {x: 0, y: -0.344, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -579,7 +634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9339b19d2d1ce0441b2ae54d396a0196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_weaponMover: {fileID: 7751060103815107234}
+  m_weapon: {fileID: 4440935416220165531}
   m_groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -612,7 +667,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: -0.51, z: 0}
+  m_Center: {x: 0, y: -0.6, z: 0}
 --- !u!4 &9147674109580112500 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 93a9de116e89ef641ae4f42c5f6153ad,

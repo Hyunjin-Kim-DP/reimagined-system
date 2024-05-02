@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] LayerMask m_playerAttackLayer;
     [SerializeField] float m_moveSpeed;
 
     // Start is called before the first frame update
@@ -20,5 +21,13 @@ public class Enemy : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, angleToPlayer, 0);
 
         GetComponent<CharacterController>().Move(transform.forward * m_moveSpeed * Time.deltaTime);
+    }
+
+    void OnTriggerEnter(Collider collider) 
+    {
+        if ((1 << collider.gameObject.layer) == m_playerAttackLayer.value) 
+        {
+            Debug.Log("Ouch ");
+        }
     }
 }

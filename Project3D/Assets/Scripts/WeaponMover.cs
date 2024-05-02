@@ -14,7 +14,7 @@ public class WeaponMover : MonoBehaviour
 
     [Space]
     [SerializeField] Vector3 m_swayEulerAngle;
-    [SerializeField] Vector3 m_swayEulerThreshold = new Vector3(30, 30, 45);
+    [SerializeField] Vector3 m_swayEulerThreshold = new Vector3(30, 15, 80);
     [SerializeField] float m_swayAngleSmooth = 5;
     [SerializeField] float m_swayAngleReturnSmooth = 7;
 
@@ -24,6 +24,12 @@ public class WeaponMover : MonoBehaviour
     [SerializeField] float m_bobbingSmooth = 10;
     Vector3 m_originLocalPos;
     float m_bobbingTimer = 0;
+
+    [Header("Rebound")]
+    [SerializeField] float m_power = 80;
+    [SerializeField] float m_reboundSmooth = 30;
+    [SerializeField] float m_reboundReturnSmooth = 10;
+    Vector3 m_reboundEuler;
 
     // Start is called before the first frame update
     void Start()
@@ -50,8 +56,10 @@ public class WeaponMover : MonoBehaviour
 
         m_swayPosition = Vector3.Lerp(m_swayPosition, Vector3.zero, Time.deltaTime * m_swayReturnSmooth);
 
-
         transform.localPosition = Vector3.Lerp(transform.localPosition, m_originLocalPos, Time.deltaTime * m_bobbingSmooth);
+
+        m_reboundEuler = Vector3.Lerp(m_reboundEuler, Vector3.zero, Time.deltaTime * m_reboundReturnSmooth);
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(m_reboundEuler), Time.deltaTime * m_reboundSmooth);
     }
 
     public void UpdateBobbing() 
@@ -60,4 +68,6 @@ public class WeaponMover : MonoBehaviour
         var bobbingLocal = transform.localPosition + Vector3.up * Mathf.Sin(m_bobbingTimer) * m_bobbingAmplitude;
         transform.localPosition = Vector3.Lerp(transform.localPosition, bobbingLocal, Time.deltaTime * m_bobbingSmooth);
     }
+
+    public void PlayRebound() => m_reboundEuler.x = -m_power;
 }
