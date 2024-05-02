@@ -5,15 +5,17 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] WeaponMover m_weaponMover;
+
+    [Space]    
     [SerializeField] LayerMask m_groundLayer;
     [SerializeField] Transform m_groundChecker;
     bool m_isGrounded;
-    
+
     [Space]
     [SerializeField] float m_speed = 10;
     [SerializeField] float m_maxSpeed = 20f;
     [SerializeField] float m_jumpHeight = 2.5f;
-
 
     Vector3 velocity;
 
@@ -35,6 +37,11 @@ public class PlayerController : MonoBehaviour
             Quaternion.identity, .1f, m_groundLayer);
         if (m_isGrounded)
         {
+            if ((forward + right).magnitude > m_speed * 0.5f) 
+            {
+                m_weaponMover.UpdateBobbing();
+            }
+
             velocity.y = Mathf.Clamp(velocity.y, -1, m_maxSpeed);
             if (Input.GetKeyDown(KeyCode.Space)) 
             {

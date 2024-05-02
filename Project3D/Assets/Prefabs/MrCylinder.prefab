@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8726346719713596682}
+  - component: {fileID: 7751060103815107234}
   m_Layer: 0
   m_Name: WeaponHolder
   m_TagString: Untagged
@@ -24,14 +25,37 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2583686579555283120}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.588, y: -0.468, z: 0.005}
+  m_LocalRotation: {x: -0, y: -0.019792402, z: -0, w: 0.9998041}
+  m_LocalPosition: {x: 0.73, y: -0.516, z: 1.581}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8391930382856382368}
   m_Father: {fileID: 6099174725529862821}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -2.268, z: 0}
+--- !u!114 &7751060103815107234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2583686579555283120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecf9ea1a584bba34a9d272d4bd6cf510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_swayPosition: {x: 0, y: 0}
+  m_swayThreshold: {x: 0.2, y: 0.1}
+  m_swaySmooth: 2.5
+  m_swayReturnSmooth: 5
+  m_swayEulerAngle: {x: 0, y: 0, z: 0}
+  m_swayEulerThreshold: {x: 30, y: 15, z: 80}
+  m_swayAngleSmooth: 5
+  m_swayAngleReturnSmooth: 7
+  m_bobbingFrequency: 10
+  m_bobbingAmplitude: 0.1
+  m_bobbingSmooth: 10
 --- !u!1 &7409305337373989378
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,7 +122,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 60
+  field of view: 50
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -267,7 +291,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 63
+    m_Bits: 191
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -347,13 +371,6 @@ MonoBehaviour:
   m_player: {fileID: 9147674109580112500}
   m_verticalAngleLimit: 70
   m_sensetivity: 1
-  m_weapon: {fileID: 8391930382856382368}
-  m_swayPosStep: 0.01
-  m_swayPosMaxStep: 0.06
-  m_smoothPosition: 10
-  m_swayRotStep: 4
-  m_swayRotMaxStep: 5
-  m_smoothRotation: 14
 --- !u!1001 &8357723534273478731
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -380,22 +397,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 5fc84099df7f5ed4d84180923fa3074a,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99980175
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5fc84099df7f5ed4d84180923fa3074a,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5fc84099df7f5ed4d84180923fa3074a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.01991253
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5fc84099df7f5ed4d84180923fa3074a,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5fc84099df7f5ed4d84180923fa3074a,
         type: 3}
@@ -405,7 +422,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 5fc84099df7f5ed4d84180923fa3074a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 2.282
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5fc84099df7f5ed4d84180923fa3074a,
         type: 3}
@@ -496,6 +513,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MrCylinder
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 93a9de116e89ef641ae4f42c5f6153ad,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -542,7 +564,7 @@ MonoBehaviour:
   m_pController: {fileID: 7938458247050749478}
   m_enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_maxHp: 100
   m_hp: 100
 --- !u!114 &7938458247050749478
@@ -557,6 +579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9339b19d2d1ce0441b2ae54d396a0196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_weaponMover: {fileID: 7751060103815107234}
   m_groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -584,7 +607,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 2.08
-  m_Radius: 1.1
+  m_Radius: 0.55
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08

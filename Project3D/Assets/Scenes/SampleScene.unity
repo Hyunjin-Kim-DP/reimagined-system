@@ -1553,55 +1553,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7285420522170237174, guid: ac6acecb5c7956b49863a7d9037804c4,
+    - target: {fileID: 3311642852047055019, guid: ac6acecb5c7956b49863a7d9037804c4,
         type: 3}
-      propertyPath: field of view
-      value: 50
+      propertyPath: m_LocalPosition.y
+      value: -1.194
+      objectReference: {fileID: 0}
+    - target: {fileID: 8186184943018349290, guid: ac6acecb5c7956b49863a7d9037804c4,
+        type: 3}
+      propertyPath: m_Center.y
+      value: -0.6
       objectReference: {fileID: 0}
     - target: {fileID: 8482742714926835918, guid: ac6acecb5c7956b49863a7d9037804c4,
         type: 3}
       propertyPath: m_Name
       value: MrCylinder
-      objectReference: {fileID: 0}
-    - target: {fileID: 8726346719713596682, guid: ac6acecb5c7956b49863a7d9037804c4,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.73
-      objectReference: {fileID: 0}
-    - target: {fileID: 8726346719713596682, guid: ac6acecb5c7956b49863a7d9037804c4,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.516
-      objectReference: {fileID: 0}
-    - target: {fileID: 8726346719713596682, guid: ac6acecb5c7956b49863a7d9037804c4,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.581
-      objectReference: {fileID: 0}
-    - target: {fileID: 8726346719713596682, guid: ac6acecb5c7956b49863a7d9037804c4,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9998041
-      objectReference: {fileID: 0}
-    - target: {fileID: 8726346719713596682, guid: ac6acecb5c7956b49863a7d9037804c4,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8726346719713596682, guid: ac6acecb5c7956b49863a7d9037804c4,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.019792402
-      objectReference: {fileID: 0}
-    - target: {fileID: 8726346719713596682, guid: ac6acecb5c7956b49863a7d9037804c4,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8726346719713596682, guid: ac6acecb5c7956b49863a7d9037804c4,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -2.268
       objectReference: {fileID: 0}
     - target: {fileID: 9147674109580112500, guid: ac6acecb5c7956b49863a7d9037804c4,
         type: 3}
