@@ -29,9 +29,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.O)) 
+        if (Input.GetMouseButtonDown(0)) 
         {
             m_weapon.OnShot();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R)) 
+        {
+            m_weapon.Reload();
         }
 
         Vector3 forward = transform.forward * Input.GetAxis("Vertical") * m_speed;
