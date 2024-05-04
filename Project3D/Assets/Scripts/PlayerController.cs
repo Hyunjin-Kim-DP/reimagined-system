@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     bool m_isGrounded;
 
     [Space]
-    [SerializeField] float m_speed = 10;
+    [SerializeField] float m_speed = 7;
     [SerializeField] float m_maxSpeed = 20f;
     [SerializeField] float m_jumpHeight = 2.5f;
 
@@ -52,14 +52,14 @@ public class PlayerController : MonoBehaviour
                 m_weapon.PlayBobbing();
             }
 
-            velocity.y = Mathf.Clamp(velocity.y, -1, m_maxSpeed);
+            velocity.y = Mathf.Clamp(velocity.y, Physics.gravity.y, m_maxSpeed);
             if (Input.GetKeyDown(KeyCode.Space)) 
             {
                 velocity.y = Mathf.Sqrt(m_jumpHeight * -2f * Physics.gravity.y);
             }
         }
 
-        velocity.y += Physics.gravity.y * Time.deltaTime;
+        velocity.y = Mathf.Clamp(velocity.y + Physics.gravity.y * Time.deltaTime, Physics.gravity.y, m_maxSpeed);
         GetComponent<CharacterController>().Move(velocity * Time.deltaTime);
     }
 

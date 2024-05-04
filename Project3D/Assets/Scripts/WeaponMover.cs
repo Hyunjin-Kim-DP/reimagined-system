@@ -11,6 +11,8 @@ public class WeaponMover : MonoBehaviour
     [SerializeField] Vector2 m_swayThreshold = new Vector2(0.2f, 0.1f);
     [SerializeField] float m_swaySmooth = 2.5f;
     [SerializeField] float m_swayReturnSmooth = 5f;
+    [SerializeField] float m_reloadMoveDistance = 2;
+
 
     [Space]
     [SerializeField] Vector3 m_swayEulerAngle;
@@ -31,6 +33,8 @@ public class WeaponMover : MonoBehaviour
     [SerializeField] float m_reboundReturnSmooth = 10;
     Vector3 m_reboundEuler;
 
+    bool m_isPlayingReload;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +45,30 @@ public class WeaponMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
+        UpdateSwayRotation();
+        UpdateSwayPosition();
+
+        transform.localPosition = Vector3.Lerp(transform.localPosition, m_originLocalPos, Time.deltaTime * m_bobbingSmooth);
+
+        m_reboundEuler = Vector3.Lerp(m_reboundEuler, Vector3.zero, Time.deltaTime * m_reboundReturnSmooth);
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(m_reboundEuler), Time.deltaTime * m_reboundSmooth);
+    }
+
+    void UpdateSwayPosition() 
+    {
+        m_weapon.localPosition = Vector3.Lerp(m_weapon.localPosition, m_swayPosition, Time.deltaTime * m_swaySmooth);
+        
+        if (m_isPlayingReload == false) 
+        {
+            m_swayPosition.x = Mathf.Clamp(m_swayPosition.x + Input.GetAxis("Mouse X"), -m_swayThreshold.x, m_swayThreshold.x);
+            m_swayPosition.y = Mathf.Clamp(m_swayPosition.y + Input.GetAxis("Mouse Y"), -m_swayThreshold.y, m_swayThreshold.y);
+
+            m_swayPosition = Vector3.Lerp(m_swayPosition, Vector3.zero, Time.deltaTime * m_swayReturnSmooth);
+        }
+    }
+
+    void UpdateSwayRotation() 
+    {
         m_weapon.localRotation = Quaternion.Slerp(m_weapon.localRotation, Quaternion.Euler(m_swayEulerAngle), Time.deltaTime * m_swayAngleSmooth); 
 
         m_swayEulerAngle.x = Mathf.Clamp(m_swayEulerAngle.x + Input.GetAxis("Mouse Y"), -m_swayEulerThreshold.x, m_swayEulerThreshold.x);
@@ -48,18 +76,6 @@ public class WeaponMover : MonoBehaviour
         m_swayEulerAngle.z = Mathf.Clamp(m_swayEulerAngle.z + Input.GetAxis("Mouse X"), -m_swayEulerThreshold.z, m_swayEulerThreshold.z);
 
         m_swayEulerAngle = Vector3.Lerp(m_swayEulerAngle, Vector3.zero, Time.deltaTime * m_swayAngleReturnSmooth);
-
-        m_weapon.localPosition = Vector3.Lerp(m_weapon.localPosition, m_swayPosition, Time.deltaTime * m_swaySmooth);
-        
-        m_swayPosition.x = Mathf.Clamp(m_swayPosition.x + Input.GetAxis("Mouse X"), -m_swayThreshold.x, m_swayThreshold.x);
-        m_swayPosition.y = Mathf.Clamp(m_swayPosition.y + Input.GetAxis("Mouse Y"), -m_swayThreshold.y, m_swayThreshold.y);
-
-        m_swayPosition = Vector3.Lerp(m_swayPosition, Vector3.zero, Time.deltaTime * m_swayReturnSmooth);
-
-        transform.localPosition = Vector3.Lerp(transform.localPosition, m_originLocalPos, Time.deltaTime * m_bobbingSmooth);
-
-        m_reboundEuler = Vector3.Lerp(m_reboundEuler, Vector3.zero, Time.deltaTime * m_reboundReturnSmooth);
-        transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(m_reboundEuler), Time.deltaTime * m_reboundSmooth);
     }
 
     public void UpdateBobbing() 
@@ -70,4 +86,17 @@ public class WeaponMover : MonoBehaviour
     }
 
     public void PlayRebound() => m_reboundEuler.x = -m_power;
+
+    public void PlayReloadHide(float reloadTime) => StartCoroutine(IEReload(reloadTime));
+
+    IEnumerator IEReload(float t) 
+    {
+        m_isPlayingReload = true;
+        // var originalSwayPos = m_swayPosition;
+        m_swayPosition = Vector3.down * m_reloadMoveDistance;
+        yield return new WaitForSeconds(t * .8f);
+
+        // m_swayPosition = Vector3.zero;
+        m_isPlayingReload = false;
+    }
 }

@@ -51,6 +51,7 @@ MonoBehaviour:
   m_swayThreshold: {x: 0.2, y: 0.1}
   m_swaySmooth: 2.5
   m_swayReturnSmooth: 5
+  m_reloadMoveDistance: 2
   m_swayEulerAngle: {x: 0, y: 0, z: 0}
   m_swayEulerThreshold: {x: 30, y: 15, z: 80}
   m_swayAngleSmooth: 5
@@ -80,6 +81,9 @@ MonoBehaviour:
   m_hitBoxPrefab: {fileID: 2472531293408193164, guid: 7f9ccb9f8e7375b4582c713848a4ff9b,
     type: 3}
   m_hitboxDistance: 1.5
+  m_maxBullet: 8
+  m_bulletCount: 8
+  m_reloadTime: 1
 --- !u!1 &2995422598360610575
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,7 +643,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   m_groundChecker: {fileID: 3311642852047055019}
-  m_speed: 10
+  m_speed: 7
   m_maxSpeed: 20
   m_jumpHeight: 2
 --- !u!143 &8186184943018349290
@@ -664,7 +668,7 @@ CharacterController:
   m_Height: 2.08
   m_Radius: 0.55
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.55
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: -0.6, z: 0}

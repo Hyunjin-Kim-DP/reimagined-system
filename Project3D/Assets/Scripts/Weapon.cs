@@ -57,6 +57,7 @@ public class Weapon : MonoBehaviour
     public void Reload() 
     {
         if (m_isReloading) return;
+        m_weaponMover.PlayReloadHide(m_reloadTime);
         StartCoroutine(IEReload());
     }
 

@@ -21,6 +21,8 @@ public class Enemy : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, angleToPlayer, 0);
 
         GetComponent<CharacterController>().Move(transform.forward * m_moveSpeed * Time.deltaTime);
+
+        GetComponent<CharacterController>().Move(Physics.gravity * Time.deltaTime);
     }
 
     void OnTriggerEnter(Collider collider) 
