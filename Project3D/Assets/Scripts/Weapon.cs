@@ -20,6 +20,9 @@ public class Weapon : MonoBehaviour
     [SerializeField] float m_reloadTime = 1;
     bool m_isReloading = false;
 
+    [Space]
+    [SerializeField] ProceduralSoundPlayer m_shotgunSFX;
+
     void Start() 
     {
         m_bulletCount = m_maxBullet;
@@ -29,6 +32,7 @@ public class Weapon : MonoBehaviour
     {
         if (m_bulletCount > 0 && m_isReloading == false) 
         {
+            m_shotgunSFX.Play();
             CreateMuzzleFlash();
             CreateHitBox();
             m_weaponMover.PlayRebound();

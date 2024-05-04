@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
 
     Vector3 velocity;
 
+    [Space]
+    [SerializeField] ProceduralSoundPlayer m_footstepPlayer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +53,7 @@ public class PlayerController : MonoBehaviour
             if ((forward + right).magnitude > m_speed * 0.5f) 
             {
                 m_weapon.PlayBobbing();
+                m_footstepPlayer.Play();
             }
 
             velocity.y = Mathf.Clamp(velocity.y, Physics.gravity.y, m_maxSpeed);
