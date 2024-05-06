@@ -109,6 +109,7 @@ MonoBehaviour:
   m_bobbingFrequency: 10
   m_bobbingAmplitude: 0.1
   m_bobbingSmooth: 10
+  m_originLocalPos: {x: 0, y: 0, z: 0}
   m_power: 80
   m_reboundSmooth: 30
   m_reboundReturnSmooth: 10
@@ -480,7 +481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_player: {fileID: 9147674109580112500}
-  m_verticalAngleLimit: 70
+  m_verticalAngleLimit: 80
   m_sensetivity: 1
 --- !u!1001 &7468952128388407395
 PrefabInstance:
@@ -508,22 +509,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0468e5e3186cdbc4893550ea014c5069,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99759793
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0468e5e3186cdbc4893550ea014c5069,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0468e5e3186cdbc4893550ea014c5069,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.06926977
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0468e5e3186cdbc4893550ea014c5069,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0468e5e3186cdbc4893550ea014c5069,
         type: 3}
@@ -533,7 +534,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0468e5e3186cdbc4893550ea014c5069,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -7.944
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0468e5e3186cdbc4893550ea014c5069,
         type: 3}
