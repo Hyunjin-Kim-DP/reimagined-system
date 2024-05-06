@@ -6,13 +6,18 @@ public class Weapon : MonoBehaviour
 {
     [SerializeField] WeaponMover m_weaponMover;
 
-    [SerializeField] GameObject m_muzzleFlashPrefab;
+    [Space]
     [SerializeField] Transform m_camera;
+    [SerializeField] GameObject m_muzzleFlashPrefab;
     [SerializeField] Transform m_muzzleFlashPosition;
 
     [Space]
     [SerializeField] GameObject m_hitBoxPrefab;
     [SerializeField] float m_hitboxDistance = 1.5f;
+
+    [Space]
+    [SerializeField] AudioClip m_fireSound;
+    [SerializeField] AudioClip m_reloadSound;
 
     [Header("Datas")]
     public int m_maxBullet = 8;
@@ -20,8 +25,6 @@ public class Weapon : MonoBehaviour
     [SerializeField] float m_reloadTime = 1;
     bool m_isReloading = false;
 
-    [Space]
-    [SerializeField] ProceduralSoundPlayer m_shotgunSFX;
 
     void Start() 
     {
@@ -32,7 +35,7 @@ public class Weapon : MonoBehaviour
     {
         if (m_bulletCount > 0 && m_isReloading == false) 
         {
-            m_shotgunSFX.Play();
+            AudioManager.Instance.PlayClipOnce(m_fireSound, transform.position);
             CreateMuzzleFlash();
             CreateHitBox();
             m_weaponMover.PlayRebound();
@@ -61,6 +64,7 @@ public class Weapon : MonoBehaviour
     public void Reload() 
     {
         if (m_isReloading) return;
+        AudioManager.Instance.PlayClipOnce(m_reloadSound, transform.position);
         m_weaponMover.PlayReloadHide(m_reloadTime);
         StartCoroutine(IEReload());
     }

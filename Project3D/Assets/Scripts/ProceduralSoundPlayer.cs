@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class ProceduralSoundPlayer : MonoBehaviour
 {
-    [SerializeField] List<AudioSource> m_SFXList;
+    [SerializeField] AudioClip[] m_SFXList;
     int m_index = 0;
 
-    int m_randomIndex => UnityEngine.Random.Range(0, m_SFXList.Count);
+    int m_randomIndex => UnityEngine.Random.Range(0, m_SFXList.Length);
 
     [SerializeField] bool m_changeOnTime;
     [SerializeField] bool m_isRandom;
     [SerializeField] float m_soundInterval = .3f;
     float timer;
-
 
     // Start is called before the first frame update
     void Start()
@@ -38,16 +37,15 @@ public class ProceduralSoundPlayer : MonoBehaviour
         timer -= Time.deltaTime;
         if (timer < 0)
         {
-            m_SFXList[m_index].Play();
+            AudioManager.Instance.PlayClipOnce(m_SFXList[m_index], transform.position);
             timer = m_soundInterval;
-
-            m_index = m_isRandom ? m_randomIndex : (m_index + 1) % m_SFXList.Count;
+            m_index = m_isRandom ? m_randomIndex : (m_index + 1) % m_SFXList.Length;
         }
     }
 
     void PlayProceduralOnCallback() 
     {
-        m_SFXList[m_index].Play();
-        m_index = m_isRandom ? m_randomIndex : (m_index + 1) % m_SFXList.Count;
+        AudioManager.Instance.PlayClipOnce(m_SFXList[m_index], transform.position);
+        m_index = m_isRandom ? m_randomIndex : (m_index + 1) % m_SFXList.Length;
     }
 }

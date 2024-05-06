@@ -24,7 +24,7 @@ public class WeaponMover : MonoBehaviour
     [SerializeField] float m_bobbingFrequency = 10;
     [SerializeField] float m_bobbingAmplitude = .1f;
     [SerializeField] float m_bobbingSmooth = 10;
-    Vector3 m_originLocalPos;
+    [SerializeField] Vector3 m_originLocalPos;
     float m_bobbingTimer = 0;
 
     [Header("Rebound")]
