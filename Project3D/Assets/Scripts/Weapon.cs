@@ -38,8 +38,8 @@ public class Weapon : MonoBehaviour
             AudioManager.Instance.PlayClipOnce(m_fireSound, transform.position);
             CreateMuzzleFlash();
 
-            var bullet = Instantiate(m_bulletPrefab, transform.position, transform.rotation).GetComponent<Rigidbody>();
-            bullet.velocity = transform.forward * m_bulletSpeed;
+            var bullet = Instantiate(m_bulletPrefab, m_camera.position, m_camera.rotation).GetComponent<Rigidbody>();
+            bullet.velocity = m_camera.forward * m_bulletSpeed;
 
             m_weaponMover.PlayRebound();
             m_bulletCount--;

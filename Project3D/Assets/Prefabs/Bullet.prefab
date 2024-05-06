@@ -105,7 +105,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 768
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
@@ -146,7 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa3d98bb19c4b814bb9a79042a056c2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_particleObject: {fileID: 0}
+  m_particleObject: {fileID: 5987183576084848471, guid: 9a066b3102866d4448008e3c5a1197aa,
+    type: 3}
   m_excludeLayer:
     serializedVersion: 2
     m_Bits: 320
