@@ -9,6 +9,7 @@ public class Breakable : MonoBehaviour
     [Space]
     [SerializeField] LayerMask m_breakingLayer;
     [SerializeField] float m_forceToBreak;
+    [SerializeField] float m_relativeVelocityMultiplier = 10;
 
     bool m_isBroken;
 
@@ -25,7 +26,7 @@ public class Breakable : MonoBehaviour
 
                 foreach (Rigidbody rb in rigidbodys) 
                 {
-                    rb.AddExplosionForce(collision.relativeVelocity.magnitude, collision.contacts[0].point, 2);
+                    rb.AddExplosionForce(collision.relativeVelocity.magnitude * m_relativeVelocityMultiplier, collision.contacts[0].point, 2);
                 }
 
                 Destroy(gameObject);

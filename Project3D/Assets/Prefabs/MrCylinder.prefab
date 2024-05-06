@@ -129,9 +129,9 @@ MonoBehaviour:
   m_camera: {fileID: 6099174725529862821}
   m_muzzleFlashPrefab: {fileID: 100004, guid: 2b80d2843dd54ca46ac16e9f28dcf9d2, type: 3}
   m_muzzleFlashPosition: {fileID: 419670638276402877}
-  m_hitBoxPrefab: {fileID: 2472531293408193164, guid: 7f9ccb9f8e7375b4582c713848a4ff9b,
+  m_bulletPrefab: {fileID: 2512445559979808331, guid: 5ab8419ab7aae5c4d8a3c8e44f17a30c,
     type: 3}
-  m_hitboxDistance: 1.5
+  m_bulletSpeed: 50
   m_fireSound: {fileID: 8300000, guid: 72cfadd526e0c0d42b740a0ad9db50c4, type: 3}
   m_reloadSound: {fileID: 8300000, guid: 099a335c45d652a479198a9bccdf8816, type: 3}
   m_maxBullet: 8
