@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FirstPersonCam : MonoBehaviour
 {
-    [SerializeField] Transform m_player;
+    [SerializeField] Rigidbody m_playerRigidbody;
     Vector2 m_inputVector;
 
     [Space]
@@ -26,6 +26,6 @@ public class FirstPersonCam : MonoBehaviour
         m_inputVector.y = Mathf.Clamp(m_inputVector.y, -90, m_verticalAngleLimit);
 
         transform.rotation = Quaternion.Euler(m_inputVector.y, m_inputVector.x, 0);
-        m_player.rotation = Quaternion.Euler(0, m_inputVector.x, 0);
+        m_playerRigidbody.MoveRotation(Quaternion.Euler(0, m_inputVector.x, 0));
     }
 }

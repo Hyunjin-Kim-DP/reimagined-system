@@ -305,6 +305,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3311642852047055019}
+  - component: {fileID: 5095457225476745942}
+  - component: {fileID: 1270383073931319381}
   m_Layer: 0
   m_Name: GroundChecker
   m_TagString: Untagged
@@ -322,11 +324,48 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -1.194, z: 0.047}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 1, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9147674109580112500}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5095457225476745942
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7614297485331421391}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1270383073931319381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7614297485331421391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b11772fa942a3a4b80f089183e05ccc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  m_isGrounded: 0
 --- !u!1 &7841495639644554966
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,7 +519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6e7759064c8e0c409587444b2f5268a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_player: {fileID: 9147674109580112500}
+  m_playerRigidbody: {fileID: 3906879032170941522}
   m_verticalAngleLimit: 80
   m_sensetivity: 1
 --- !u!1001 &7468952128388407395
@@ -657,7 +696,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 93a9de116e89ef641ae4f42c5f6153ad,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8186184943018349290}
+      addedObject: {fileID: 3906879032170941522}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 93a9de116e89ef641ae4f42c5f6153ad,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8202241930488871540}
   m_SourcePrefab: {fileID: 100100000, guid: 93a9de116e89ef641ae4f42c5f6153ad, type: 3}
 --- !u!1 &8482742714926835918 stripped
 GameObject:
@@ -695,17 +738,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9339b19d2d1ce0441b2ae54d396a0196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_weapon: {fileID: 4440935416220165531}
-  m_groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  m_groundChecker: {fileID: 3311642852047055019}
   m_speed: 7
-  m_maxSpeed: 20
-  m_jumpHeight: 2
+  m_jumpImpulse: 6
+  m_timeToMaxSpeed: 0.1
+  m_weapon: {fileID: 4440935416220165531}
+  m_groundChecker: {fileID: 1270383073931319381}
   m_footstepPlayer: {fileID: 2412866397706201031}
---- !u!143 &8186184943018349290
-CharacterController:
+--- !u!54 &3906879032170941522
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8482742714926835918}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
+--- !u!136 &8202241930488871540
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -722,14 +789,11 @@ CharacterController:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2.08
+  serializedVersion: 2
   m_Radius: 0.55
-  m_SlopeLimit: 45
-  m_StepOffset: 0.55
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: -0.6, z: 0}
+  m_Height: 1.95
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.65, z: 0}
 --- !u!4 &9147674109580112500 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 93a9de116e89ef641ae4f42c5f6153ad,
