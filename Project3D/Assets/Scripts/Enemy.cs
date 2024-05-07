@@ -6,6 +6,10 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] LayerMask m_playerAttackLayer;
     [SerializeField] float m_moveSpeed;
+    [SerializeField] int HP = 3;
+
+    [Space]
+    [SerializeField] GameObject m_particleObject;
 
     // Start is called before the first frame update
     void Start()
@@ -16,25 +20,31 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(Player.Instance.transform);
+        // transform.LookAt(Player.Instance.transform);
+        var diff = Player.Instance.transform.position - transform.position;
+        GetComponent<Rigidbody>().MoveRotation(Quaternion.Euler(0, -(Mathf.Atan2(diff.z, diff.x) + Mathf.PI * .5f) * Mathf.Rad2Deg, 0));
+    }
 
-        GetComponent<CharacterController>().Move(transform.forward * m_moveSpeed * Time.deltaTime);
-
-        GetComponent<CharacterController>().Move(Physics.gravity * Time.deltaTime);
+    void FixedUpdate() 
+    {
+        GetComponent<Rigidbody>().MovePosition(transform.position + -transform.forward * m_moveSpeed * Time.deltaTime);
     }
 
     void OnTriggerEnter(Collider collider) 
     {
         if ((1 << collider.gameObject.layer) == m_playerAttackLayer.value) 
         {
-            Debug.Log("Ouch ");
-        }
-    }
+            if (HP > 0) 
+            {
+                HP--;
+                if (HP <= 0) 
+                {
+                    GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
 
-    void OnDrawGizmos() 
-    {
-        Gizmos.color = Color.red;
-        
-        Gizmos.DrawWireSphere(transform.position, 1);
+                    var obj = Instantiate(m_particleObject, transform.position, transform.rotation);
+                    Destroy(obj, obj.GetComponent<ParticleSystem>().main.startLifetime.constant);
+                }
+            }
+        }
     }
 }
