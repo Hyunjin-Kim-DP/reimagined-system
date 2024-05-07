@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     float smoothInputValue;
 
     [Space]
+    [SerializeField] Transform m_camera;
     [SerializeField] Weapon m_weapon;
     [SerializeField] GroundChecker m_groundChecker;
     [SerializeField] ProceduralSoundPlayer m_footstepPlayer;
@@ -31,14 +32,27 @@ public class PlayerController : MonoBehaviour
             m_weapon.OnShot();
         }
 
+        if (Input.GetMouseButtonDown(1)) 
+        {
+            GetComponent<Rigidbody>().AddForce(m_camera.forward * m_jumpImpulse, ForceMode.Impulse);
+        }
+        
         if (Input.GetKeyDown(KeyCode.R)) 
         {
             m_weapon.Reload();
         }
 
+        Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+        float smoothDelta = 0;
+        smoothInputValue = Mathf.SmoothDamp(smoothInputValue, input.normalized.magnitude, ref smoothDelta, m_timeToMaxSpeed);
+
+        Vector2 smoothSpeed = input * m_speed * smoothInputValue * Time.deltaTime;
+        m_moveVelocity = transform.forward * smoothSpeed.y + transform.right * smoothSpeed.x;
+
         if (m_groundChecker.m_isGrounded)
         {
-            if (GetComponent<Rigidbody>().velocity.magnitude > m_speed * 0.5f) 
+            if (input.magnitude > 0) 
             {
                 m_weapon.PlayBobbing();
                 m_footstepPlayer.Play();
@@ -50,13 +64,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-
-        float smoothDelta = 0;
-        smoothInputValue = Mathf.SmoothDamp(smoothInputValue, input.normalized.magnitude, ref smoothDelta, m_timeToMaxSpeed);
-
-        Vector2 smoothSpeed = input * m_speed * smoothInputValue * Time.deltaTime;
-        m_moveVelocity = transform.forward * smoothSpeed.y + transform.right * smoothSpeed.x;
     }
 
     void FixedUpdate()

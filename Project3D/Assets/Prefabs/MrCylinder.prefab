@@ -741,6 +741,7 @@ MonoBehaviour:
   m_speed: 7
   m_jumpImpulse: 6
   m_timeToMaxSpeed: 0.1
+  m_camera: {fileID: 6099174725529862821}
   m_weapon: {fileID: 4440935416220165531}
   m_groundChecker: {fileID: 1270383073931319381}
   m_footstepPlayer: {fileID: 2412866397706201031}
