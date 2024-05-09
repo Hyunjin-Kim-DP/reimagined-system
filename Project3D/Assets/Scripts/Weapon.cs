@@ -12,6 +12,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] Transform m_muzzleFlashPosition;
 
     [Space]
+    [SerializeField] Transform m_bulletEmitter;
     [SerializeField] GameObject m_bulletPrefab;
     [SerializeField] float m_bulletSpeed;
 
@@ -38,8 +39,14 @@ public class Weapon : MonoBehaviour
             AudioManager.Instance.PlayClipOnce(m_fireSound, transform.position);
             CreateMuzzleFlash();
 
-            var bullet = Instantiate(m_bulletPrefab, m_camera.position, m_camera.rotation).GetComponent<Rigidbody>();
-            bullet.velocity = m_camera.forward * m_bulletSpeed;
+            RaycastHit hit;
+            Vector3 bulletDir;
+            bool isRayHit = Physics.Raycast(m_camera.position, m_camera.forward, out hit);
+
+            bulletDir = isRayHit ? hit.point - m_bulletEmitter.position : m_camera.position + m_camera.forward * 100 - m_bulletEmitter.position;
+
+            var bullet = Instantiate(m_bulletPrefab, m_bulletEmitter.position, m_bulletEmitter.rotation).GetComponent<Rigidbody>();
+            bullet.velocity = bulletDir.normalized * m_bulletSpeed;
 
             m_weaponMover.PlayRebound();
             m_bulletCount--;

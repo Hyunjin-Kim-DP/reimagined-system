@@ -17,6 +17,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GroundChecker m_groundChecker;
     [SerializeField] ProceduralSoundPlayer m_footstepPlayer;
 
+
+    [Space]
+    [SerializeField] GameObject m_debugSpawnObject;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +67,13 @@ public class PlayerController : MonoBehaviour
                 GetComponent<Rigidbody>().AddForce(Vector3.up * m_jumpImpulse, ForceMode.Impulse);
             }
         }
+
+#if DEBUG
+        if (Input.GetKeyDown(KeyCode.F) && m_debugSpawnObject != null) 
+        {
+            Instantiate(m_debugSpawnObject, transform.position + m_camera.forward * 7, Quaternion.identity);
+        }
+#endif
 
     }
 

@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public float m_maxHp = 100;
     public float m_hp;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +26,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     void OnCollisionEnter(Collision collision) 

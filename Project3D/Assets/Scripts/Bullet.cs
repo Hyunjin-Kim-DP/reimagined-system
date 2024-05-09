@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
 
     bool m_isColiide; // prevent double collide
 
-    float m_lifeTime = 2;
+    float m_lifeTime = 4;
 
     void Update()
     {
